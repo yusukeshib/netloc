@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		748FE91D1B133A5F00C9ED1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 748FE91B1B133A5F00C9ED1D /* AppDelegate.m */; };
+		748FE91D1B133A5F00C9ED1D /* NLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 748FE91B1B133A5F00C9ED1D /* NLAppDelegate.m */; };
 		748FE91E1B133A5F00C9ED1D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 748FE91C1B133A5F00C9ED1D /* main.m */; };
 		748FE9241B133A8400C9ED1D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 748FE9201B133A8400C9ED1D /* MainMenu.xib */; };
-		748FE9251B133A8400C9ED1D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 748FE9221B133A8400C9ED1D /* Images.xcassets */; };
 		748FE9261B133A8400C9ED1D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 748FE9231B133A8400C9ED1D /* Info.plist */; };
 		74951F7F1B133798002827D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74951F7E1B133798002827D7 /* SystemConfiguration.framework */; };
+		74C6DCCE1B13987200F3E513 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 74C6DCCD1B13987200F3E513 /* icon.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		748FE91A1B133A5F00C9ED1D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		748FE91B1B133A5F00C9ED1D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		748FE91A1B133A5F00C9ED1D /* NLAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLAppDelegate.h; sourceTree = "<group>"; };
+		748FE91B1B133A5F00C9ED1D /* NLAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLAppDelegate.m; sourceTree = "<group>"; };
 		748FE91C1B133A5F00C9ED1D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		748FE9211B133A8400C9ED1D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		748FE9221B133A8400C9ED1D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		748FE9231B133A8400C9ED1D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74951F5B1B133714002827D7 /* netloc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netloc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74951F7E1B133798002827D7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		74C6DCCD1B13987200F3E513 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,8 +41,8 @@
 		748FE9191B133A5F00C9ED1D /* src */ = {
 			isa = PBXGroup;
 			children = (
-				748FE91A1B133A5F00C9ED1D /* AppDelegate.h */,
-				748FE91B1B133A5F00C9ED1D /* AppDelegate.m */,
+				748FE91A1B133A5F00C9ED1D /* NLAppDelegate.h */,
+				748FE91B1B133A5F00C9ED1D /* NLAppDelegate.m */,
 				748FE91C1B133A5F00C9ED1D /* main.m */,
 			);
 			path = src;
@@ -52,7 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				748FE9201B133A8400C9ED1D /* MainMenu.xib */,
-				748FE9221B133A8400C9ED1D /* Images.xcassets */,
+				74C6DCCD1B13987200F3E513 /* icon.icns */,
 				748FE9231B133A8400C9ED1D /* Info.plist */,
 			);
 			path = res;
@@ -62,18 +62,26 @@
 			isa = PBXGroup;
 			children = (
 				748FE9191B133A5F00C9ED1D /* src */,
-				74951F7E1B133798002827D7 /* SystemConfiguration.framework */,
 				748FE91F1B133A8400C9ED1D /* res */,
-				74951F5C1B133714002827D7 /* Products */,
+				74C6DCCA1B1396E600F3E513 /* lib */,
+				74951F5C1B133714002827D7 /* bin */,
 			);
 			sourceTree = "<group>";
 		};
-		74951F5C1B133714002827D7 /* Products */ = {
+		74951F5C1B133714002827D7 /* bin */ = {
 			isa = PBXGroup;
 			children = (
 				74951F5B1B133714002827D7 /* netloc.app */,
 			);
-			name = Products;
+			name = bin;
+			sourceTree = "<group>";
+		};
+		74C6DCCA1B1396E600F3E513 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				74951F7E1B133798002827D7 /* SystemConfiguration.framework */,
+			);
+			name = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,7 +128,7 @@
 				Base,
 			);
 			mainGroup = 74951F521B133714002827D7;
-			productRefGroup = 74951F5C1B133714002827D7 /* Products */;
+			productRefGroup = 74951F5C1B133714002827D7 /* bin */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -134,9 +142,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				748FE9251B133A8400C9ED1D /* Images.xcassets in Resources */,
 				748FE9261B133A8400C9ED1D /* Info.plist in Resources */,
 				748FE9241B133A8400C9ED1D /* MainMenu.xib in Resources */,
+				74C6DCCE1B13987200F3E513 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,7 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				748FE91E1B133A5F00C9ED1D /* main.m in Sources */,
-				748FE91D1B133A5F00C9ED1D /* AppDelegate.m in Sources */,
+				748FE91D1B133A5F00C9ED1D /* NLAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

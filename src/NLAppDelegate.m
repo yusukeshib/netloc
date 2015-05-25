@@ -6,15 +6,15 @@
 //  Copyright (c) 27 Heisei fata.io. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "NLAppDelegate.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
-@interface AppDelegate ()
+@interface NLAppDelegate ()
 
 @property (weak) IBOutlet NSWindow *window;
 @end
 
-@implementation AppDelegate
+@implementation NLAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
