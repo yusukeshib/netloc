@@ -26,6 +26,22 @@
     
     // loc
     locItems = [[NSMutableDictionary alloc] init];
+    
+    // setup
+    [self setupLoc];
+    // start at login
+    NSString * appPath = [[NSBundle mainBundle] bundlePath];
+    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
+    [self _setStartAtLogin:[self loginItemExistsWithLoginItemReference:loginItems ForPath:appPath]];
+    CFRelease(loginItems);
+}
+- (void)setupLoc {
+    // reset
+    for (id k in [locItems keyEnumerator]) {
+        [statusMenu removeItemAtIndex:0];
+    }
+    [locItems removeAllObjects];
+    //
     SCPreferencesRef prefs = SCPreferencesCreate(NULL, (CFStringRef)@"SystemConfiguration", NULL);
     SCNetworkSetRef locCurrent = SCNetworkSetCopyCurrent(prefs);
     NSString *id_current = (__bridge NSString *)SCNetworkSetGetSetID(locCurrent);
@@ -44,20 +60,23 @@
         NSString *tagKey = [NSString stringWithFormat:@"%ld",mi.tag];
         [locItems setObject:setid forKey:tagKey];
         [statusMenu insertItem:mi atIndex:0];
+        tagid++;
     }
     CFRelease((CFArrayRef)locations);
     CFRelease(prefs);
     
-    // start at login
-    NSString * appPath = [[NSBundle mainBundle] bundlePath];
-    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-    [self _setStartAtLogin:[self loginItemExistsWithLoginItemReference:loginItems ForPath:appPath]];
-    CFRelease(loginItems);
 }
 - (void)updateLoc:(id)sender {
     NSMenuItem *selected = sender;
     NSString *tagKey = [NSString stringWithFormat:@"%ld",selected.tag];
     NSString *setid_update = [locItems objectForKey:tagKey];
+#ifndef NOUSE_SCSELECT
+    NSTask* task = [[NSTask alloc] init];
+    task.launchPath = @"/usr/sbin/scselect";
+    task.arguments = [NSArray arrayWithObjects:setid_update, nil];
+    [task launch];
+    [task waitUntilExit];
+#else
     //
     SCPreferencesRef prefs = SCPreferencesCreate(NULL, (CFStringRef)@"SystemConfiguration", NULL);
     NSArray *locations = (__bridge NSArray *)SCNetworkSetCopyAll(prefs);
@@ -70,6 +89,8 @@
     }
     CFRelease((CFArrayRef)locations);
     CFRelease(prefs);
+#endif
+    [self setupLoc];
 }
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
 }

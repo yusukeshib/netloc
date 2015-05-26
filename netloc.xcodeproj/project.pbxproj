@@ -10,12 +10,12 @@
 		748FE91D1B133A5F00C9ED1D /* NLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 748FE91B1B133A5F00C9ED1D /* NLAppDelegate.m */; };
 		748FE91E1B133A5F00C9ED1D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 748FE91C1B133A5F00C9ED1D /* main.m */; };
 		748FE9241B133A8400C9ED1D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 748FE9201B133A8400C9ED1D /* MainMenu.xib */; };
-		748FE9261B133A8400C9ED1D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 748FE9231B133A8400C9ED1D /* Info.plist */; };
 		74951F7F1B133798002827D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74951F7E1B133798002827D7 /* SystemConfiguration.framework */; };
 		74C6DCCE1B13987200F3E513 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 74C6DCCD1B13987200F3E513 /* icon.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7422EB4D1B1467A40061B7BE /* netloc.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = netloc.xcconfig; sourceTree = "<group>"; };
 		748FE91A1B133A5F00C9ED1D /* NLAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLAppDelegate.h; sourceTree = "<group>"; };
 		748FE91B1B133A5F00C9ED1D /* NLAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLAppDelegate.m; sourceTree = "<group>"; };
 		748FE91C1B133A5F00C9ED1D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -61,6 +61,7 @@
 		74951F521B133714002827D7 = {
 			isa = PBXGroup;
 			children = (
+				7422EB4D1B1467A40061B7BE /* netloc.xcconfig */,
 				748FE9191B133A5F00C9ED1D /* src */,
 				748FE91F1B133A8400C9ED1D /* res */,
 				74C6DCCA1B1396E600F3E513 /* lib */,
@@ -94,6 +95,8 @@
 				74951F571B133714002827D7 /* Sources */,
 				74951F581B133714002827D7 /* Frameworks */,
 				74951F591B133714002827D7 /* Resources */,
+				7422EB4B1B1467580061B7BE /* Add Build Number */,
+				7422EB4C1B1467750061B7BE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -142,13 +145,44 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				748FE9261B133A8400C9ED1D /* Info.plist in Resources */,
 				748FE9241B133A8400C9ED1D /* MainMenu.xib in Resources */,
 				74C6DCCE1B13987200F3E513 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7422EB4B1B1467580061B7BE /* Add Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Add Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\"";
+			showEnvVarsInLog = 0;
+		};
+		7422EB4C1B1467750061B7BE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "CFBundleShortVersionString=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\nCFBundleIdentifier=$(/usr/libexec/PlistBuddy -c \"Print CFBundleIdentifier\" \"${PROJECT_PATH}/${INFOPLIST_FILE}\")\npkgbuild \\\n--root \"${TARGET_BUILD_DIR}\" \\\n--install-location \"/Applications\" \\\n--identifier \"$CFBundleIdentifier\" \\\n--version \"$CFBundleShortVersionString\" \\\n\"${DIST_DIR}/${PRODUCT_NAME}-$CFBundleShortVersionString.pkg\"";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		74951F571B133714002827D7 /* Sources */ = {
@@ -219,6 +253,7 @@
 		};
 		74951F771B133715002827D7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7422EB4D1B1467A40061B7BE /* netloc.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -268,6 +303,7 @@
 		};
 		74951F7A1B133715002827D7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7422EB4D1B1467A40061B7BE /* netloc.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;

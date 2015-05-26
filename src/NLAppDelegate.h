@@ -11,6 +11,7 @@
 - (IBAction)setStartAtLogin:(id)sender;
 - (void)_setStartAtLogin:(BOOL)val;
 
+- (void)setupLoc;
 - (void)updateLoc:(id)sender;
 
 - (BOOL)loginItemExistsWithLoginItemReference:(LSSharedFileListRef)theLoginItemsRefs ForPath:(NSString *)appPath;
