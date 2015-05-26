@@ -21,7 +21,7 @@
 		748FE91C1B133A5F00C9ED1D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		748FE9211B133A8400C9ED1D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		748FE9231B133A8400C9ED1D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		74951F5B1B133714002827D7 /* netloc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netloc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		74951F5B1B133714002827D7 /* netlocDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netlocDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74951F7E1B133798002827D7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		74C6DCCD1B13987200F3E513 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,7 +71,7 @@
 		74951F5C1B133714002827D7 /* bin */ = {
 			isa = PBXGroup;
 			children = (
-				74951F5B1B133714002827D7 /* netloc.app */,
+				74951F5B1B133714002827D7 /* netlocDebug.app */,
 			);
 			name = bin;
 			sourceTree = "<group>";
@@ -101,7 +101,7 @@
 			);
 			name = netloc;
 			productName = netloc;
-			productReference = 74951F5B1B133714002827D7 /* netloc.app */;
+			productReference = 74951F5B1B133714002827D7 /* netlocDebug.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -261,7 +261,8 @@
 				INFOPLIST_FILE = "$(SRCROOT)/res/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME)Debug";
+				SYMROOT = "$(SRCROOT)/build";
 			};
 			name = Debug;
 		};
@@ -274,6 +275,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = "$(SRCROOT)/build";
 			};
 			name = Release;
 		};
