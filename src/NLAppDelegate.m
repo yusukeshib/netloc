@@ -20,7 +20,7 @@
     //
     title = [[NSMutableAttributedString alloc]
              initWithString:@""
-             attributes:[NSDictionary dictionaryWithObject:[NSFont menuBarFontOfSize:[NSFont smallSystemFontSize]] forKey:NSFontAttributeName]];
+             attributes:[NSDictionary dictionaryWithObject:[NSFont menuBarFontOfSize:[NSFont systemFontSize]] forKey:NSFontAttributeName]];
     //
     statusItem.attributedTitle = title;
     
@@ -64,7 +64,6 @@
     }
     CFRelease((CFArrayRef)locations);
     CFRelease(prefs);
-    
 }
 - (void)updateLoc:(id)sender {
     NSMenuItem *selected = sender;
