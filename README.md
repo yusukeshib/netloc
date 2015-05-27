@@ -1,0 +1,3 @@
+# Network Location switcher in Menubar for MACOSX
+
+....
