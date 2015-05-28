@@ -39,8 +39,8 @@
     // reset
     for (id k in [locItems keyEnumerator]) {
         [statusMenu removeItemAtIndex:0];
-        [locItems removeObjectForKey:k];
     }
+    [locItems removeAllObjects];
     //
     SCPreferencesRef prefs = SCPreferencesCreate(NULL, (CFStringRef)@"SystemConfiguration", NULL);
     SCNetworkSetRef locCurrent = SCNetworkSetCopyCurrent(prefs);

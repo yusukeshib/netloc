@@ -1,5 +1,4 @@
-# Network Location switcher in Menubar for MACOSX
+# Network location switcher in menubar for MACOSX
 
-### Download Latest
-
-[Latest Version pkg](https://github.com/fataio/netloc/raw/master/dist/netloc.pkg)
+### Download
+Download [Latest Version](https://github.com/fataio/netloc/raw/master/dist/netloc.pkg)
