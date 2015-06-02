@@ -210,6 +210,7 @@
 /* Begin XCBuildConfiguration section */
 		74951F761B133715002827D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7422EB4D1B1467A40061B7BE /* netloc.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -290,6 +291,7 @@
 		};
 		74951F791B133715002827D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7422EB4D1B1467A40061B7BE /* netloc.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -307,6 +309,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = "$(SRCROOT)/res/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
