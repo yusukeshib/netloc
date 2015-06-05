@@ -11,7 +11,7 @@ Enjoy, Developers!
 
 ## Download
 
-Download [Latest Version pkg](dist/netloc.pkg?raw=true).
+Download [Latest version application zipped](dist/netloc.zip?raw=true).
 
 ## License
 
