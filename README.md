@@ -5,6 +5,10 @@
 This application is stationed to menubar with showing current network lcation setting name, and in menu you can switch network location immediately.  
 Enjoy, Developers!  
 
+## Requirements
+
+OSX Version: 10.7+
+
 ## Screenshot
 
 ![animation](/res/screenshot.gif?raw=true)
