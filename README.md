@@ -15,7 +15,11 @@ OSX Version: 10.7+
 
 ## Download
 
-Download [Latest version application zipped](dist/netloc.zip?raw=true).
+Download [Latest version application zipped](dist/netloc.zip?raw=true).  
+
+or with [brew cask](http://caskroom.io/).  
+
+`brew cask install netloc`
 
 ## License
 
