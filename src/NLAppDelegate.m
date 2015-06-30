@@ -10,6 +10,10 @@
 
 //@synthesize window;
 
+- (IBAction)openNetworkPreference:(id)sender {
+    [[NSWorkspace sharedWorkspace] openFile:@"/System/Library/PreferencePanes/Network.prefPane"];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 }
 -(void)awakeFromNib{

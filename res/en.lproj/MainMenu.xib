@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -104,10 +104,16 @@
                         <action selector="setStartAtLogin:" target="Voe-Tx-rLC" id="Tif-vd-gnM"/>
                     </connections>
                 </menuItem>
-                <menuItem title="Quit" id="KLk-VK-i35">
+                <menuItem title="Open Network Preference" id="KLk-VK-i35">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="terminate:" target="-1" id="WBo-xU-6IU"/>
+                        <action selector="openNetworkPreference:" target="Voe-Tx-rLC" id="Dvb-Lx-cdl"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Quit" id="MA4-PC-cd5">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="terminate:" target="-1" id="hrM-7x-Hry"/>
                     </connections>
                 </menuItem>
             </items>

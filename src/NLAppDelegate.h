@@ -11,6 +11,8 @@
 - (IBAction)setStartAtLogin:(id)sender;
 - (void)_setStartAtLogin:(BOOL)val;
 
+- (IBAction)openNetworkPreference:(id)sender;
+
 - (void)setupLoc;
 - (void)updateLoc:(id)sender;
 
