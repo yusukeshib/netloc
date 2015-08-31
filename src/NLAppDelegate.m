@@ -2,13 +2,19 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 
 @interface NLAppDelegate ()
-
-@property (weak) IBOutlet NSWindow *window;
+@property IBOutlet NSWindow *window;
 @end
 
 @implementation NLAppDelegate
 
 //@synthesize window;
+
+- (void)menuWillOpen:(NSMenu *)menu {
+    is_idle = NO;
+}
+- (void)menuWillClose:(NSMenu *)menu {
+    is_idle = YES;
+}
 
 - (IBAction)openNetworkPreference:(id)sender {
     [[NSWorkspace sharedWorkspace] openFile:@"/System/Library/PreferencePanes/Network.prefPane"];
@@ -32,6 +38,7 @@
     locItems = [[NSMutableDictionary alloc] init];
     
     // setup
+    is_idle = YES;
     [self setupLoc];
     // start at login
     NSString * appPath = [[NSBundle mainBundle] bundlePath];
@@ -41,7 +48,7 @@
 }
 - (void)setupLoc {
     // reset
-    for (id k in [locItems keyEnumerator]) {
+    for(int i=0i;i<[[locItems keyEnumerator] allObjects].count;i++) {
         [statusMenu removeItemAtIndex:0];
     }
     [locItems removeAllObjects];
