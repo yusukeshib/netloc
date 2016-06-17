@@ -1,13 +1,13 @@
 #import <Cocoa/Cocoa.h>
 
 @interface NLAppDelegate : NSObject <NSApplicationDelegate,NSMenuDelegate> {
-    //NSWindow *window;
-    IBOutlet NSMenu *statusMenu;
-    NSStatusItem *statusItem;
-    IBOutlet NSMenuItem *mi_startAtLogin;
-    NSMutableAttributedString *title;
-    NSMutableDictionary *locItems;
-    bool is_idle;
+	//NSWindow *window;
+	IBOutlet NSMenu *statusMenu;
+	NSStatusItem *statusItem;
+	IBOutlet NSMenuItem *mi_startAtLogin;
+	NSMutableAttributedString *title;
+	NSMutableDictionary *locItems;
+	bool is_idle;
 }
 - (IBAction)setStartAtLogin:(id)sender;
 - (void)_setStartAtLogin:(BOOL)val;
