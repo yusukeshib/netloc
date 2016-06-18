@@ -21,8 +21,10 @@
 	SCPreferencesRef prefs = SCPreferencesCreate(NULL, (CFStringRef)@"SystemConfiguration", NULL);
 	SCNetworkSetRef locCurrent = SCNetworkSetCopyCurrent(prefs);
 	NSString *setid_current = (__bridge NSString *)SCNetworkSetGetSetID(locCurrent);
+	BOOL ret = [setid_current isEqualToString:_setid];
 	CFRelease(prefs);
-	return [setid_current isEqualToString:_setid];
+	CFRelease(locCurrent);
+	return ret;
 }
 - (void)select {
 	if([self isCurrent]) return;

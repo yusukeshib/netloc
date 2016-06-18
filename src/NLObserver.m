@@ -39,10 +39,7 @@
 -(void)check:(id)param {
 	@autoreleasepool {
 		while(termination_flg == NO) {
-			[NSThread sleepForTimeInterval:(double)5000.0/1000.0];
-			// TODO:if changed...
-			//NLStore *store = [NLStore GetInstance];
-			//NSArray * locItems = [store locItems];
+			[NSThread sleepForTimeInterval:(double)1000.0/1000.0];
 			[app performSelectorOnMainThread:@selector(update) withObject:nil waitUntilDone:NO];
 		}
 		//
