@@ -8,18 +8,11 @@
 #define BARWIDTH 36.0f
 #define DEFAULT_IMAGESIZE 8
 
--(id)initWithStatusItem:(NSStatusItem *)si {
+-(id)initWithApp:(id)_app {
 	self = [super init];
 	if(self != nil) {
 		proc_lock = [[NSLock alloc] init];
-		statusItem = si;
-		title = [[NSMutableAttributedString alloc]
-			initWithString:@""
-					attributes:[NSDictionary dictionaryWithObject:[NSFont menuBarFontOfSize:[NSFont systemFontSize]] forKey:NSFontAttributeName]];
-		updateInterval = 0.5;
-		imageSize = 8;
-		//
-		barimage = [[NSImage alloc] initWithSize:NSMakeSize(BARWIDTH, imageSize)];
+		app = _app;
 	}
 	return self;
 }
@@ -27,27 +20,14 @@
 	[self terminate];
 	//[super dealloc];
 }
-- (void)setImageSize:(int)size {
-	imageSize = size;
-	barimage = [[NSImage alloc] initWithSize:NSMakeSize(BARWIDTH, imageSize)];
-}
-- (int)imageSize {
-	return imageSize;
-}
-- (void)setUpdateInterval:(int)val {
-	updateInterval = val;
-}
-- (int)updateInterval {
-	return updateInterval;
-}
-+(NLObserver *)runWithStatusItem:(NSStatusItem *)statusItem {
-		NLObserver *updater = [[NLObserver alloc] initWithStatusItem:statusItem];
-		[updater begin];
-		return updater;
++(NLObserver *)runWithApp:(id)app {
+	NLObserver *observer = [[NLObserver alloc] initWithApp:app];
+	[observer begin];
+	return observer;
 }
 -(void)begin {
 	[proc_lock lock];
-	[NSThread detachNewThreadSelector:@selector(update:)
+	[NSThread detachNewThreadSelector:@selector(check:)
 													 toTarget:self
 												 withObject:nil];
 }
@@ -56,54 +36,16 @@
 	[proc_lock lock]; // wait for terminate.
 	[proc_lock unlock];
 }
--(void)update:(id)param {
-	mach_port_t host_port;
-	host_cpu_load_info_data_t prev_cpu_load, cpu_load;
-	mach_msg_type_number_t count = HOST_CPU_LOAD_INFO_COUNT;
-	natural_t user, system, idle;
-	int usage;
-
+-(void)check:(id)param {
 	@autoreleasepool {
-		host_port = mach_host_self();
-		host_statistics(host_port, HOST_CPU_LOAD_INFO, (host_info_t)&prev_cpu_load, &count);
-
 		while(termination_flg == NO) {
-			[NSThread sleepForTimeInterval:(double)updateInterval/1000.0];
-			host_statistics(host_port, HOST_CPU_LOAD_INFO, (host_info_t)&cpu_load, &count);
-			user = cpu_load.cpu_ticks[CPU_STATE_USER] - prev_cpu_load.cpu_ticks[CPU_STATE_USER];
-			system = cpu_load.cpu_ticks[CPU_STATE_SYSTEM] - prev_cpu_load.cpu_ticks[CPU_STATE_SYSTEM];
-			idle = cpu_load.cpu_ticks[CPU_STATE_IDLE] - prev_cpu_load.cpu_ticks[CPU_STATE_IDLE];
-			usage = round((double)(user + system) / (system + user + idle) * 100.0);
-			prev_cpu_load = cpu_load;
-
-			[self performSelectorOnMainThread:@selector(updateView:) withObject:[NSNumber numberWithInt:usage] waitUntilDone:NO];
+			[NSThread sleepForTimeInterval:(double)1000.0/1000.0];
+			[app performSelectorOnMainThread:@selector(update) withObject:nil waitUntilDone:NO];
 		}
 		//
 		[proc_lock unlock];
 	}
 	[NSThread exit];
-}
--(void) updateView:(NSNumber *)usageNum {
-	int usage = [usageNum intValue];
-	//
-	if(imageSize > 0) {
-		[barimage lockFocus];
-		[[NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:1.0] set];
-		NSRectFill(NSMakeRect(0,0,BARWIDTH,imageSize));
-		[[NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:1.0] set];
-		NSRectFill(NSMakeRect(BORDERWIDTH,BORDERWIDTH,BARWIDTH-BORDERWIDTH*2,imageSize-BORDERWIDTH*2));
-		[[NSColor greenColor] set];
-		NSRectFill(NSMakeRect(BORDERWIDTH,BORDERWIDTH,(BARWIDTH-BORDERWIDTH*2)*usage/100.0f,imageSize-BORDERWIDTH*2));
-		[barimage unlockFocus];
-		//
-		[statusItem setImage:barimage];
-		[statusItem setTitle:nil];
-	} else {
-		[statusItem setImage:nil];
-		[title replaceCharactersInRange:NSMakeRange(0,title.string.length) withString:[NSString stringWithFormat:@"%d%%",usage]];
-		statusItem.attributedTitle = title;
-	}
-
 }
 
 @end

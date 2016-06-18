@@ -1,5 +1,4 @@
 #import "NLAppDelegate.h"
-#import <SystemConfiguration/SystemConfiguration.h>
 
 @interface NLAppDelegate ()
 @property IBOutlet NSWindow *window;
@@ -21,83 +20,20 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 }
 -(void)awakeFromNib{
+	menuInitialized = NO;
 	statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
 	[statusItem setMenu:statusMenu];
 	[statusItem setHighlightMode:YES];
 	//
-	title = [[NSMutableAttributedString alloc]
-		initWithString:@""
-				attributes:[NSDictionary dictionaryWithObject:[NSFont menuBarFontOfSize:[NSFont systemFontSize]] forKey:NSFontAttributeName]];
-	//
-	statusItem.attributedTitle = title;
-
-	// loc
-	locItems = [[NSMutableDictionary alloc] init];
-
 	// setup
 	is_idle = YES;
-	[self setupLoc];
 	// start at login
 	NSString * appPath = [[NSBundle mainBundle] bundlePath];
 	LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
 	[self _setStartAtLogin:[self loginItemExistsWithLoginItemReference:loginItems ForPath:appPath]];
 	CFRelease(loginItems);
-}
-- (void)setupLoc {
-	// reset
-	for(int i=0i;i<[[locItems keyEnumerator] allObjects].count;i++) {
-		[statusMenu removeItemAtIndex:0];
-	}
-	[locItems removeAllObjects];
 	//
-	SCPreferencesRef prefs = SCPreferencesCreate(NULL, (CFStringRef)@"SystemConfiguration", NULL);
-	SCNetworkSetRef locCurrent = SCNetworkSetCopyCurrent(prefs);
-	NSString *id_current = (__bridge NSString *)SCNetworkSetGetSetID(locCurrent);
-	NSArray *locations = (__bridge NSArray *)SCNetworkSetCopyAll(prefs);
-	int tagid = 0;
-	for (id item in locations) {
-		NSString *name = (__bridge NSString *)SCNetworkSetGetName((__bridge SCNetworkSetRef)item);
-		NSString *setid = (__bridge NSString *)SCNetworkSetGetSetID((__bridge SCNetworkSetRef)item);
-		NSMenuItem *mi = [[NSMenuItem alloc]initWithTitle:name action:@selector(updateLoc:) keyEquivalent:@""];
-		if([setid isEqualTo:id_current]) {
-			mi.state = NSOnState;
-			[title replaceCharactersInRange:NSMakeRange(0,title.string.length) withString:name];
-			statusItem.attributedTitle = title;
-		}
-		mi.tag = tagid;
-		NSString *tagKey = [NSString stringWithFormat:@"%ld",mi.tag];
-		[locItems setObject:setid forKey:tagKey];
-		[statusMenu insertItem:mi atIndex:0];
-		tagid++;
-	}
-	CFRelease((CFArrayRef)locations);
-	CFRelease(prefs);
-}
-- (void)updateLoc:(id)sender {
-	NSMenuItem *selected = sender;
-	NSString *tagKey = [NSString stringWithFormat:@"%ld",selected.tag];
-	NSString *setid_update = [locItems objectForKey:tagKey];
-#ifndef NOUSE_SCSELECT
-	NSTask* task = [[NSTask alloc] init];
-	task.launchPath = @"/usr/sbin/scselect";
-	task.arguments = [NSArray arrayWithObjects:setid_update, nil];
-	[task launch];
-	[task waitUntilExit];
-#else
-	//
-	SCPreferencesRef prefs = SCPreferencesCreate(NULL, (CFStringRef)@"SystemConfiguration", NULL);
-	NSArray *locations = (__bridge NSArray *)SCNetworkSetCopyAll(prefs);
-	for (id item in locations) {
-		NSString *setid = (__bridge NSString *)SCNetworkSetGetSetID((__bridge SCNetworkSetRef)item);
-		if([setid isEqualTo:setid_update]) {
-			Boolean ret = SCNetworkSetSetCurrent((__bridge SCNetworkSetRef)item);
-			NSLog(@"%d",ret);
-		}
-	}
-	CFRelease((CFArrayRef)locations);
-	CFRelease(prefs);
-#endif
-	[self setupLoc];
+	observer = [NLObserver runWithApp:self];
 }
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
 }
@@ -124,6 +60,39 @@
 	if (item)
 		CFRelease(item);
 }
+- (void)updateLoc:(id)sender {
+	NSMenuItem *selected = sender;
+	NLStore *store = [NLStore GetInstance];
+	NLLoc *locItem = [store locAt:(int)selected.tag];
+	[locItem select];
+	[self update];
+}
+-(void)update {
+	NLStore *store = [NLStore GetInstance];
+	NSArray * locItems = [store locItems];
+	NSMenu *menu = [statusItem menu];
+	if(menuInitialized) {
+		for(int i=0;i<[locItems count];i++) {
+			[menu removeItemAtIndex:0];
+		}
+	}
+	for(int i=0;i<[locItems count];i++) {
+		NLLoc *item = [locItems objectAtIndex:i];
+		NSMenuItem *mi = [[NSMenuItem alloc]initWithTitle:item.name action:@selector(updateLoc:) keyEquivalent:@""];
+		if([item isCurrent]) {
+			mi.state = NSOnState;
+			NSMutableAttributedString *title =
+			[[NSMutableAttributedString alloc] initWithString:item.name attributes:
+			 [NSDictionary dictionaryWithObject:[NSFont menuBarFontOfSize:[NSFont systemFontSize]]
+																	 forKey:NSFontAttributeName]];
+			statusItem.attributedTitle = title;
+		}
+		mi.tag = i;
+		[menu insertItem:mi atIndex:0];
+	}
+	menuInitialized = YES;
+}
+
 - (void)disableLoginItemWithLoginItemsReference:(LSSharedFileListRef )theLoginItemsRefs ForPath:(NSString *)appPath {
 	UInt32 seedValue;
 	CFURLRef thePath = NULL;

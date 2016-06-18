@@ -1,0 +1,5 @@
+.DS_Store
+/tmp/
+xcuserdata/
+project.xcworkspace/
+*Debug.zip
