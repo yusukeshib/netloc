@@ -13,6 +13,8 @@
 		748FE9241B133A8400C9ED1D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 748FE9201B133A8400C9ED1D /* MainMenu.xib */; };
 		74951F7F1B133798002827D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74951F7E1B133798002827D7 /* SystemConfiguration.framework */; };
 		74C6DCCE1B13987200F3E513 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 74C6DCCD1B13987200F3E513 /* icon.icns */; };
+		74D900CF1D13AD78003F05B1 /* NLStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D900CE1D13AD78003F05B1 /* NLStore.m */; };
+		74D900D21D13BA21003F05B1 /* NLLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 74D900D11D13BA21003F05B1 /* NLLoc.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,10 @@
 		74951F5B1B133714002827D7 /* netlocDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = netlocDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74951F7E1B133798002827D7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		74C6DCCD1B13987200F3E513 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		74D900CD1D13AD78003F05B1 /* NLStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLStore.h; sourceTree = "<group>"; };
+		74D900CE1D13AD78003F05B1 /* NLStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLStore.m; sourceTree = "<group>"; };
+		74D900D01D13BA21003F05B1 /* NLLoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NLLoc.h; sourceTree = "<group>"; };
+		74D900D11D13BA21003F05B1 /* NLLoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NLLoc.m; sourceTree = "<group>"; };
 		74F6316D1B43991B00BB1A55 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = ../../../../System/Library/Frameworks/AppKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,6 +53,10 @@
 			children = (
 				748FE91A1B133A5F00C9ED1D /* NLAppDelegate.h */,
 				748FE91B1B133A5F00C9ED1D /* NLAppDelegate.m */,
+				74D900CD1D13AD78003F05B1 /* NLStore.h */,
+				74D900CE1D13AD78003F05B1 /* NLStore.m */,
+				74D900D01D13BA21003F05B1 /* NLLoc.h */,
+				74D900D11D13BA21003F05B1 /* NLLoc.m */,
 				74781F331B438A0300FAA863 /* NLObserver.h */,
 				74781F341B438A0300FAA863 /* NLObserver.m */,
 				748FE91C1B133A5F00C9ED1D /* main.m */,
@@ -121,7 +131,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = NL;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = fata.io;
 				TargetAttributes = {
 					74951F5A1B133714002827D7 = {
@@ -197,9 +207,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74D900D21D13BA21003F05B1 /* NLLoc.m in Sources */,
 				74781F351B438A0300FAA863 /* NLObserver.m in Sources */,
 				748FE91E1B133A5F00C9ED1D /* main.m in Sources */,
 				748FE91D1B133A5F00C9ED1D /* NLAppDelegate.m in Sources */,
+				74D900CF1D13AD78003F05B1 /* NLStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +251,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -254,7 +267,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -293,7 +306,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SYMROOT = tmp;
@@ -304,12 +317,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7422EB4D1B1467A40061B7BE /* netloc.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/res/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.fata.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				SYMROOT = tmp;
 			};
@@ -319,13 +332,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7422EB4D1B1467A40061B7BE /* netloc.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				INFOPLIST_FILE = "$(SRCROOT)/res/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.fata.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = tmp;
 			};
