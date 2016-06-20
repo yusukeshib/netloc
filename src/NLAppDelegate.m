@@ -69,10 +69,12 @@
 }
 -(void)update {
 	NLStore *store = [NLStore GetInstance];
+	NSUInteger currentLocCounts = [[store locItems] count];
+	[store update];
 	NSArray * locItems = [store locItems];
 	NSMenu *menu = [statusItem menu];
 	if(menuInitialized) {
-		for(int i=0;i<[locItems count];i++) {
+		for(int i=0;i<currentLocCounts;i++) {
 			[menu removeItemAtIndex:0];
 		}
 	}
