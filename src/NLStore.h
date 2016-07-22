@@ -10,12 +10,12 @@
 #import "NLLoc.h"
 
 @interface NLStore : NSObject {
-	NSMutableArray *locItems;
+	NSArray *locItems;
 }
 
 +(NLStore *)GetInstance;
 -(void)update;
--(NSMutableArray *)locItems;
+-(NSArray *)locItems;
 -(NLLoc *)locAt:(int)index;
 
 

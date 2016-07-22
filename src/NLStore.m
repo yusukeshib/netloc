@@ -12,7 +12,7 @@
 @implementation NLStore
 static NLStore *instance = nil;
 
--(NSMutableArray *)locItems {
+-(NSArray *)locItems {
 	return locItems;
 }
 -(NLLoc *)locAt:(int)index {
@@ -31,17 +31,20 @@ static NLStore *instance = nil;
 	return self;
 }
 -(void)update {
-	[locItems removeAllObjects];
+	NSMutableArray *newItems = [[NSMutableArray alloc] init];
 	SCPreferencesRef prefs = SCPreferencesCreate(NULL, (CFStringRef)@"SystemConfiguration", NULL);
 	NSArray *locations = (__bridge NSArray *)SCNetworkSetCopyAll(prefs);
 	for (id item in locations) {
 		NSString *name = (__bridge NSString *)SCNetworkSetGetName((__bridge SCNetworkSetRef)item);
 		NSString *setid = (__bridge NSString *)SCNetworkSetGetSetID((__bridge SCNetworkSetRef)item);
 		NLLoc *loc = [[NLLoc alloc]initWithName:name setid:setid];
-		[locItems addObject:loc];
+		[newItems addObject:loc];
 	}
 	CFRelease((CFArrayRef)locations);
 	CFRelease(prefs);
+	//
+	NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:NO];
+	locItems = [newItems sortedArrayUsingDescriptors:@[sort]];
 }
 
 @end
