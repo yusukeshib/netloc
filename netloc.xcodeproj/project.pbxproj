@@ -136,6 +136,8 @@
 				TargetAttributes = {
 					74951F5A1B133714002827D7 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 4TZUUASNPN;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -318,12 +320,16 @@
 			baseConfigurationReference = 7422EB4D1B1467A40061B7BE /* netloc.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 4TZUUASNPN;
 				INFOPLIST_FILE = "$(SRCROOT)/res/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.fata.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SYMROOT = tmp;
 			};
 			name = Debug;
@@ -333,13 +339,17 @@
 			baseConfigurationReference = 7422EB4D1B1467A40061B7BE /* netloc.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4TZUUASNPN;
 				INFOPLIST_FILE = "$(SRCROOT)/res/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.fata.app.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SYMROOT = tmp;
 			};
 			name = Release;
